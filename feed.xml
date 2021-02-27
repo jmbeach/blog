@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://jmbeach.github.io/blog/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jmbeach.github.io/blog/blog/" rel="alternate" type="text/html" /><updated>2021-02-27T00:00:26-06:00</updated><id>https://jmbeach.github.io/blog/blog/feed.xml</id><title type="html">Jared Beach’s Dev Blog</title><subtitle>Blog where I share solutions to niche problems I've come up against and the challenging projects that are keeping me up at night.</subtitle><entry><title type="html">iOS Proxy Switcher</title><link href="https://jmbeach.github.io/blog/blog/ios/iphone/proxy/2021/02/20/ios-proxy-switcher.html" rel="alternate" type="text/html" title="iOS Proxy Switcher" /><published>2021-02-20T08:52:16-06:00</published><updated>2021-02-20T08:52:16-06:00</updated><id>https://jmbeach.github.io/blog/blog/ios/iphone/proxy/2021/02/20/ios-proxy-switcher</id><content type="html" xml:base="https://jmbeach.github.io/blog/blog/ios/iphone/proxy/2021/02/20/ios-proxy-switcher.html">&lt;p&gt;Switching your iOS proxy profile is, unfortunately, very tedious. The manual way to do this is to go to Settings -&amp;gt; Wi-Fi -&amp;gt; click the information icon on your Wi-Fi connection -&amp;gt; Configure Proxy (at the very bottom) -&amp;gt; Manual -&amp;gt; Type everything in. If you need to change any of that, you’ll have to do it all again…&lt;/p&gt;
+
+&lt;p&gt;The solution I’m about to offer you is far from perfect, but it’s much more automated and requires much less brain power than the manual way.&lt;/p&gt;
+
+&lt;p&gt;To do this, we are going to use &lt;a href=&quot;https://en.wikipedia.org/wiki/Shortcuts_(app)&quot;&gt;Shortcuts&lt;/a&gt; to install and remove &lt;a href=&quot;https://developer.apple.com/documentation/appstoreconnectapi/profiles&quot;&gt;profiles&lt;/a&gt; that will configure our proxy settings in a stream-lined way. This approach is inspired by &lt;a href=&quot;https://apple.stackexchange.com/a/223926/57640&quot;&gt;an AskDifferent answer by jcaron&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before I lose you, here’s what we’re trying to acheive:&lt;/p&gt;
+
+&lt;video src=&quot;https://jareds-dev-blog.s3.amazonaws.com/ios-profile-switcher.MP4&quot; controls=&quot;&quot; autoplay=&quot;&quot; width=&quot;300px&quot;&gt;&lt;/video&gt;
+
+&lt;h1 id=&quot;enable-supervised-mode&quot;&gt;Enable Supervised Mode&lt;/h1&gt;
+
+&lt;p&gt;Unfortunately, for this to work, your device has to be &lt;a href=&quot;https://support.apple.com/guide/deployment-reference-ios/enabling-device-supervision-ior7ba06c270/web&quot;&gt;supervised&lt;/a&gt; (WARNING: which requires factory resetting your phone 😥). Also, this requires access to a mac. What it doesn’t require is Jailbreaking!&lt;/p&gt;
+
+&lt;p&gt;Before you begin, make sure to &lt;a href=&quot;https://support.apple.com/en-us/HT211149&quot;&gt;diable Find My Phone&lt;/a&gt; or this will fail.&lt;/p&gt;
+
+&lt;p&gt;I won’t cover this portion in detail because it’s already well-documented elsewhere. See &lt;a href=&quot;https://support.jamfnow.com/s/article/207704656-Supervising-iOS-Devices-with-Apple-Configurator-2-5-or-Later&quot;&gt;this article, for example&lt;/a&gt;. But I will show some screenshots of enabling this.&lt;/p&gt;
+
+&lt;p&gt;In &lt;a href=&quot;https://support.apple.com/apple-configurator&quot;&gt;Apple Configurator 2&lt;/a&gt;, Right-click your device and choose Prepare. Choose similar options to the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/manage_device.png&quot; alt=&quot;Manage device&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Choose “Do not enroll in MDM” on the next screen. 
+Choose (or make and choose) an organization. This is just an arbitrary name.&lt;/p&gt;
+
+&lt;p&gt;Choose to show all steps on the next screen:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/prepare.png&quot; alt=&quot;Prepare&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click Prepare. It will likely tell you that you have to erase your phone to do this. Make a backup of your phone, if you have not already, and continue.&lt;/p&gt;
+
+&lt;h1 id=&quot;create-the-enable-proxy-shortcut&quot;&gt;Create the Enable Proxy Shortcut&lt;/h1&gt;
+
+&lt;p&gt;Now for the fun stuff. The easiest way to create the Enable Proxy shortcut would be to download and modify my version here: &lt;a href=&quot;https://www.icloud.com/shortcuts/b3027ef26e6144e880c0d48593ad9cbf&quot;&gt;Enable Charles Proxy Shortcut&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The shortcut we’re trying to create is shown below on the right:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/shortcuts.png&quot; alt=&quot;shortcuts&quot; width=&quot;300px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here are the steps in case you want to do it manually (This is all of them even though it’s slightly cut off):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/proxy-steps.jpg&quot; alt=&quot;proxy steps&quot; width=&quot;300px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Step one and step two of the above image open a link to a &lt;a href=&quot;https://developer.apple.com/documentation/appstoreconnectapi/profiles&quot;&gt;profile&lt;/a&gt; that sets all of the proxy settings. To make these steps set your desired proxy settings, see Configure Proxy Profile below.&lt;/p&gt;
+
+&lt;h2 id=&quot;configure-proxy-profile&quot;&gt;Configure Proxy Profile&lt;/h2&gt;
+
+&lt;p&gt;For this to work, you need to make a &lt;a href=&quot;https://developer.apple.com/documentation/appstoreconnectapi/profiles&quot;&gt;profile&lt;/a&gt; that configures the device’s proxy settings. The following is my profile file that configures my iPhone to use &lt;a href=&quot;https://www.charlesproxy.com/&quot;&gt;Charles Proxy&lt;/a&gt; as my device’s proxy (which lets me snoop on my iPhone’s network traffic):&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/jmbeach/8a186134ccca23818e5b40d4f4f90247.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;You should be able to leave pretty much everything the same and just change the settings you care about (such as ProxyServer). Afterwards, you can upload it to your own gist (or anywhere internet accessable) and replace the URL in step 1 with yours. The final step isn’t 100% necessary but I find it convneient. It opens the Profile settings page so you can quickly enable the newly downloaded profile. The separate shortcut is covered below.&lt;/p&gt;
+
+&lt;h1 id=&quot;create-the-profile-settings-shortcut&quot;&gt;Create the Profile Settings Shortcut&lt;/h1&gt;
+
+&lt;p&gt;The following shortcut opens the Profile settings page (which is somewhat hard to find) and streamlines enabling the newly downloaded profile and also removing it when you are done with it. Below is the only step in the shortcut. It can also be downloaded &lt;a href=&quot;https://www.icloud.com/shortcuts/ed07e1c7d12f48e99977084ebb33c17d&quot;&gt;here&lt;/a&gt; for extra convenience.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/open-settings.jpg&quot; alt=&quot;Open Settings&quot; width=&quot;300px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The shortcut simply opens the URL &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prefs:root=General&amp;amp;path=ManagedConfigurationList&lt;/code&gt; in safari which actually opens the preferences page.&lt;/p&gt;
+
+&lt;h1 id=&quot;putting-it-all-together&quot;&gt;Putting It All Together&lt;/h1&gt;
+
+&lt;p&gt;This is the same video from the start of the article, but let’s revisit it.&lt;/p&gt;
+
+&lt;video src=&quot;https://jareds-dev-blog.s3.amazonaws.com/ios-profile-switcher.MP4&quot; controls=&quot;&quot; autoplay=&quot;&quot; width=&quot;300px&quot;&gt;&lt;/video&gt;
+
+&lt;p&gt;What’s happening is after you click the Enable Proxy shortcut, you’re taken to a page where you can download the profile. After clicking allow, you should manually go back to shortcuts, which will continue the shortcut automation and open the profile page. Here, you click Install, type in your password, and now you’re configured.&lt;/p&gt;
+
+&lt;p&gt;To stop using your proxy, you simply uninstall the profile, which once again, you can get easy access to using the Open Profile Settings Shortcut.&lt;/p&gt;
+
+&lt;p&gt;Like I said, it’s not perfect. There’s a decent number of steps here, but the main reason why I still like it is that I don’t have to remember anything. I’m just following clicks until my profile is enabled or disabled.&lt;/p&gt;</content><author><name></name></author><category term="ios" /><category term="iphone" /><category term="proxy" /><summary type="html">Switching your iOS proxy profile is, unfortunately, very tedious. The manual way to do this is to go to Settings -&amp;gt; Wi-Fi -&amp;gt; click the information icon on your Wi-Fi connection -&amp;gt; Configure Proxy (at the very bottom) -&amp;gt; Manual -&amp;gt; Type everything in. If you need to change any of that, you’ll have to do it all again…</summary></entry></feed>
