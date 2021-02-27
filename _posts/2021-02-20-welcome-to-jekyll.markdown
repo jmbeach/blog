@@ -1,29 +1,40 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "iOS Proxy Switcher"
 date:   2021-02-20 08:52:16 -0600
-categories: jekyll update
+categories: ios iphone proxy
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-Jekyll requires blog post files to be named according to the following format:
+Switching your iOS proxy profile is, unfortunately, very tedious. The manual way is to go to Settings -> Wi-Fi -> click the information icon on your Wi-Fi connection -> Configure Proxy (at the very bottom) -> Manual -> Type everything in. If you need to change any of that, you'll have to do it all again...
 
-`YEAR-MONTH-DAY-title.MARKUP`
+The solution I'm about to offer you is far from perfect, but it's much more automated and requires much less brain power than the manual way.
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+To do this, we are going to use [Shortcuts](wiki-shortcuts) to install and remove [profiles](apple-docs-profile) that will configure our proxy settings in a stream-lined way. This approach is inspired by [an AskDifferent answer by jcaron](ask-different-answer).
 
-Jekyll also offers powerful support for code snippets:
+# Enable Supervised Mode
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+Unfortunately, for this to work, your device has to be [supervised](apple-docs-supervised) (WARNING: which requires factory resetting your phone :sad-emoji:).
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+I won't cover this portion in detail because it's already well-documented elsewhere. See [this article, for example](supervise-device). But I will show some screenshots of enabling this.
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+In [Apple Configurator](apple-configurator), Right-click your device and choose Prepare. Choose similar options to the following:
+
+![Manage device](/images/manage_device.png)
+
+Choose "Do not enroll in MDM" on the next screen. 
+Choose (or make and choose) an organization. This is just an arbitrary name.
+
+Choose to show all steps on the next screen:
+
+![Prepare](/images/prepare.png)
+
+Click Prepare. It will likely tell you that you have to erase your phone to do this. Make a backup of your phone, if you have not already, and continue.
+
+# 
+
+[supervise-device]: https://support.jamfnow.com/s/article/207704656-Supervising-iOS-Devices-with-Apple-Configurator-2-5-or-Later
+[wiki-shortcuts]: https://en.wikipedia.org/wiki/Shortcuts_(app)
+[apple-docs-profile]: https://developer.apple.com/documentation/appstoreconnectapi/profiles
+[apple-docs-supervised]: https://support.apple.com/guide/deployment-reference-ios/enabling-device-supervision-ior7ba06c270/web
+[ask-different-answer]: https://apple.stackexchange.com/a/223926/57640
+[apple-configurator]: https://support.apple.com/apple-configurator
