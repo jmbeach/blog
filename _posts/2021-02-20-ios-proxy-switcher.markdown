@@ -11,6 +11,10 @@ The solution I'm about to offer you is far from perfect, but it's much more auto
 
 To do this, we are going to use [Shortcuts][wiki-shortcuts] to install and remove [profiles][apple-docs-profile] that will configure our proxy settings in a stream-lined way. This approach is inspired by [an AskDifferent answer by jcaron][ask-different-answer].
 
+Before I lose you, here's what we're trying to acheive:
+
+<video src="https://jareds-dev-blog.s3.amazonaws.com/ios-profile-switcher.MP4" controls autoplay width="300px"></video>
+
 # Enable Supervised Mode
 
 Unfortunately, for this to work, your device has to be [supervised][apple-docs-supervised] (WARNING: which requires factory resetting your phone 😥). Also, this requires access to a mac. What it doesn't require is Jailbreaking!
@@ -60,7 +64,19 @@ The following shortcut opens the Profile settings page (which is somewhat hard t
 
 ![Open Settings]({{site.baseurl}}/images/open-settings.jpg){: width="300px"}
 
-The shortcut simply opens the URL `prefs:root=General&path=ManagedConfigurationList` in safari.
+The shortcut simply opens the URL `prefs:root=General&path=ManagedConfigurationList` in safari which actually opens the preferences page.
+
+# Putting It All Together
+
+This is the same video from the start of the article, but let's revisit it.
+
+<video src="https://jareds-dev-blog.s3.amazonaws.com/ios-profile-switcher.MP4" controls autoplay width="300px"></video>
+
+What's happening is after you click the Enable Proxy shortcut, you're taken to a page where you can download the profile. After clicking allow, you should manually go back to shortcuts, which will continue the shortcut automation and open the profile page. Here, you click Install, type in your password, and now you're configured.
+
+To stop using your proxy, you simply uninstall the profile, which once again, you can get easy access to using the Open Profile Settings Shortcut.
+
+Like I said, it's not perfect. There's a decent number of steps here, but the main reason why I still like it is that I don't have to remember anything. I'm just following clicks until my profile is enabled or disabled.
 
 [charles-proxy]: https://www.charlesproxy.com/
 [supervise-device]: https://support.jamfnow.com/s/article/207704656-Supervising-iOS-Devices-with-Apple-Configurator-2-5-or-Later
