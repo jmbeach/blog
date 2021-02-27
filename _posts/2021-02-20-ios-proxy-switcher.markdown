@@ -44,13 +44,23 @@ Here are the steps in case you want to do it manually (This is all of them even 
 
 ![proxy steps]({{site.baseurl}}/images/proxy-steps.jpg){: width="300px"}
 
-# Configure Proxy Profile
+Step one and step two of the above image open a link to a [profile][apple-docs-profile] that sets all of the proxy settings. To make these steps set your desired proxy settings, see Configure Proxy Profile below.
+
+## Configure Proxy Profile
 
 For this to work, you need to make a [profile][apple-docs-profile] that configures the device's proxy settings. The following is my profile file that configures my iPhone to use [Charles Proxy][charles-proxy] as my device's proxy (which lets me snoop on my iPhone's network traffic):
 
 <script src="https://gist.github.com/jmbeach/8a186134ccca23818e5b40d4f4f90247.js"></script>
 
-You should be able to leave pretty much everything the same and just change the settings you care about (such as ProxyServer).
+You should be able to leave pretty much everything the same and just change the settings you care about (such as ProxyServer). Afterwards, you can upload it to your own gist (or anywhere internet accessable) and replace the URL in step 1 with yours. The final step isn't 100% necessary but I find it convneient. It opens the Profile settings page so you can quickly enable the newly downloaded profile. The separate shortcut is covered below.
+
+# Create the Profile Settings Shortcut
+
+The following shortcut opens the Profile settings page (which is somewhat hard to find) and streamlines enabling the newly downloaded profile and also removing it when you are done with it. Below is the only step in the shortcut. It can also be downloaded [here](https://www.icloud.com/shortcuts/ed07e1c7d12f48e99977084ebb33c17d) for extra convenience.
+
+![Open Settings]({{site.baseurl}}/images/open-settings.jpg){: width="300px"}
+
+The shortcut simply opens the URL `prefs:root=General&path=ManagedConfigurationList` in safari.
 
 [charles-proxy]: https://www.charlesproxy.com/
 [supervise-device]: https://support.jamfnow.com/s/article/207704656-Supervising-iOS-Devices-with-Apple-Configurator-2-5-or-Later
